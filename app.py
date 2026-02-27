@@ -131,14 +131,14 @@ DANH SÁCH SẢN PHẨM ĐÃ CÓ TRONG CATALOG (TUYỆT ĐỐI CẤM ĐỀ XUẤ
 {catalog_context}
 
 NHIỆM VỤ:
-1. BẢNG 1 (Market Trends): Đề xuất 5 sản phẩm trending Amazon/Etsy tương đồng CÔNG NĂNG & VẬT LIỆU với sản phẩm mục tiêu.
+1. TABLE 1 (Market Trends): Đề xuất 5 sản phẩm trending Amazon/Etsy tương đồng CÔNG NĂNG & VẬT LIỆU với sản phẩm mục tiêu.
    - Trình bày dưới dạng BẢNG MARKDOWN bao gồm các cột: Product Name | Sales/Favs | Keywords | Note | Ref Link
-   - Sales/Favs: Đưa số liệu thực tế (VD: 2,400+ sold/mo).
+   - Sales/Favs: Đưa số liệu thực tế (VD: 2,400+ sold/mo OR 1,000 fav/mo).
    - Keywords: 3-4 từ khóa ngách dài. (Ngăn cách bằng dấu phẩy).
    - Note: Giải thích sâu về kỹ thuật (vùng in/khắc, combo quà tặng).
    - Ref Link: Ở TẤT CẢ CÁC DÒNG SẢN PHẨM, BẮT BUỘC ghi đúng chữ 'INSERT_LINK_HERE'
 
-2. BẢNG 2 (Scale): Đề xuất 5 sản phẩm MỚI (TUYỆT ĐỐI KHÔNG CÓ TRONG CATALOG) tương ứng cho 5 Niche win sau: {niches_str}.
+2. TABLE 2 (Scale): Đề xuất 5 sản phẩm MỚI (TUYỆT ĐỐI KHÔNG CÓ TRONG CATALOG) tương ứng cho 5 Niche win sau: {niches_str}.
    - Trình bày dưới dạng BẢNG MARKDOWN bao gồm các cột: Niche | Product Name | Features and Design | Ref Link
    - Cột Niche: BẮT BUỘC ghi lại chính xác mã Niche được cung cấp (VD: COUPLE (COU), DAD (DAD)...).
    - Sản phẩm phải có tính khả thi, cùng kỹ thuật sản xuất (in/khắc/vật liệu). Bạn ĐƯỢC TOÀN QUYỀN SÁNG TẠO kiểu dáng, tính năng mới.
@@ -280,14 +280,14 @@ if sales_file:
                 
                 with col1:
                     st.subheader(f"🎯 Niche Win của [{search_query[:15]}...]")
-                    st.caption("Ngách bán tốt CỦA RIÊNG SẢN PHẨM NÀY")
+                    st.caption("Niche bán tốt CỦA RIÊNG SẢN PHẨM NÀY")
                     df_tn_display = target_niches.copy()
                     df_tn_display['SUM of Total Revenue'] = df_tn_display['SUM of Total Revenue'].apply(format_currency)
                     st.dataframe(df_tn_display, use_container_width=True, hide_index=True)
                 
                 with col2:
                     st.subheader("📈 Trending Niches")
-                    st.caption("Ngách phổ biến của TOÀN BỘ PRODUCT LINE")
+                    st.caption("Niche phổ biến của TOÀN BỘ PRODUCT LINE")
                     df_ln_display = line_niches.copy()
                     df_ln_display['SUM of Total Revenue'] = df_ln_display['SUM of Total Revenue'].apply(format_currency)
                     st.dataframe(df_ln_display, use_container_width=True, hide_index=True)
@@ -356,4 +356,5 @@ if sales_file:
 else:
 
     st.info("👋 Vui lòng upload dữ liệu Sales History (và Catalog nếu có) ở thanh công cụ bên trái để bắt đầu.")
+
 
