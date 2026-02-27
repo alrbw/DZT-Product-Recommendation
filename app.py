@@ -2,6 +2,12 @@
 # CẤU HÌNH API KEY TỪ STREAMLIT SECRETS
 # ==========================================
 import streamlit as st
+import pandas as pd  # <--- ĐẢM BẢO CÓ DÒNG NÀY
+import openai
+from openai import OpenAI
+import urllib.parse
+import textwrap
+import re
 
 # Lấy key từ hệ thống quản lý bí mật của Streamlit
 if "OPENAI_API_KEY" in st.secrets:
@@ -348,4 +354,5 @@ if sales_file:
             else:
                 st.warning("Không tìm thấy dữ liệu liên quan đến sản phẩm này để đề xuất.")
 else:
+
     st.info("👋 Vui lòng upload dữ liệu Sales History (và Catalog nếu có) ở thanh công cụ bên trái để bắt đầu.")
