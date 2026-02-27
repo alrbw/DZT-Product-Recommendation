@@ -1,0 +1,19 @@
+# Bảo mật API Key (Cực kỳ quan trọng)
+.streamlit/secrets.toml
+
+# Bảo mật dữ liệu kinh doanh (Ngăn lộ file Sales và Catalog của bạn)
+*.csv
+*.xlsx
+*.xls
+
+# Loại bỏ các file rác của Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv
+venv/
+ENV/
+
+# Loại bỏ file tạm của hệ điều hành
+.DS_Store
+Thumbs.db
