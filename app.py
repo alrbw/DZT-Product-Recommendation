@@ -2,7 +2,7 @@
 # CẤU HÌNH API KEY TỪ STREAMLIT SECRETS
 # ==========================================
 import streamlit as st
-import pandas as pd  # <--- ĐẢM BẢO CÓ DÒNG NÀY
+import pandas as pd  
 import openai
 from openai import OpenAI
 import urllib.parse
@@ -238,10 +238,10 @@ st.title("🚀 DZT-Search: Product Recommendation")
 with st.sidebar:
     st.header("📂 Data Sources")
     sales_file = st.file_uploader("1. Sales History (CSV)", type=['csv'])
-    catalog_file = st.file_uploader("2. Your Catalog (CSV)", type=['csv'])
+    catalog_file = st.file_uploader("2. Catalog (CSV)", type=['csv'])
     
     st.markdown("---")
-    if st.button("🗑️ Xóa toàn bộ bộ nhớ AI", use_container_width=True):
+    if st.button("🗑️ Delete AI Memory", use_container_width=True):
         st.session_state['ai_results'] = {}
         st.rerun()
 
@@ -264,10 +264,10 @@ if sales_file:
         # Ô TÌM KIẾM DẠNG GÕ (TYPE TO SEARCH)
         product_options = sorted(df_sales['Product Base'].dropna().unique().tolist())
         search_query = st.selectbox(
-            label="🔍 Gõ hoặc chọn sản phẩm mục tiêu (Type to search):", 
+            label="🔍 Type to search:", 
             options=product_options,
             index=None, 
-            placeholder="Ví dụ: Leather Wallet..."
+            placeholder="Eg: Leather Wallet..."
         )
 
         if search_query:
@@ -303,11 +303,11 @@ if sales_file:
 
                 # KIỂM TRA BỘ NHỚ ĐỆM ĐỂ HIỂN THỊ NÚT BẤM
                 has_result = search_query in st.session_state['ai_results']
-                btn_label = f"🔄 Renew AI Research cho {search_query}" if has_result else f"✨ Thực hiện Research Market (AI R&D)"
+                btn_label = f"🔄 Renew AI Research For {search_query}" if has_result else f"✨ Click To Research Market (AI R&D)"
                 btn_type = "secondary" if has_result else "primary"
                 
                 if st.button(btn_label, type=btn_type, use_container_width=True):
-                    with st.spinner("Đang phân tích thị trường & kết nối OpenAI... Vui lòng chờ..."):
+                    with st.spinner("Đang phân tích... Vui lòng chờ..."):
                         target_info = df_sales[df_sales['Product Base'] == search_query].iloc[0]
                         n_col = 'NICHE-DETAILS' if 'NICHE-DETAILS' in line_niches.columns else line_niches.columns[0]
                         
@@ -347,12 +347,13 @@ if sales_file:
 
                 # HIỂN THỊ KẾT QUẢ AI ĐÃ LƯU
                 if search_query in st.session_state['ai_results']:
-                    st.success(f"✅ Đang hiển thị kết quả phân tích AI đã lưu trữ cho: **{search_query}**")
+                    st.success(f"✅ Displaying AI analysis results for: **{search_query}**")
                     with st.container():
                         display_ai_result(st.session_state['ai_results'][search_query])
 
             else:
-                st.warning("Không tìm thấy dữ liệu liên quan đến sản phẩm này để đề xuất.")
+                st.warning("No Results.")
 else:
 
     st.info("👋 Vui lòng upload dữ liệu Sales History (và Catalog nếu có) ở thanh công cụ bên trái để bắt đầu.")
+
